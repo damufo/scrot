@@ -1,0 +1,54 @@
+name: build-appimage
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar dependencias
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            autotools-dev \
+            automake \
+            pkg-config \
+            libimlib2-dev \
+            libx11-dev \
+            libxext-dev
+
+      - name: Compilar scrot
+        run: |
+          ./autogen.sh || true
+          ./configure
+          make -j$(nproc)
+
+      - name: Preparar AppDir
+        run: |
+          mkdir -p AppDir/usr/bin
+          cp src/scrot AppDir/usr/bin/
+
+      - name: Descargar linuxdeploy
+        run: |
+          wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+          chmod +x linuxdeploy-x86_64.AppImage
+
+      - name: Construír AppImage
+        run: |
+          ./linuxdeploy-x86_64.AppImage \
+            --appdir AppDir \
+            -e AppDir/usr/bin/scrot \
+            --output appimage
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: scrot-appimage
+          path: *.AppImage
