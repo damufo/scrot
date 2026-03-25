@@ -33,7 +33,9 @@ jobs:
           ./autogen.sh || true
           ./configure
           make -j$(nproc)
-
+      - name: Ver binario
+        run: |
+          ls -l src/
       - name: Preparar AppDir
         run: |
           mkdir -p AppDir/usr/bin
