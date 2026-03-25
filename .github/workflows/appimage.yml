@@ -19,11 +19,12 @@ jobs:
             build-essential \
             autotools-dev \
             automake \
+            autoconf \
+            autoconf-archive \
             pkg-config \
             libimlib2-dev \
             libx11-dev \
             libxext-dev
-
       - name: Compilar scrot
         run: |
           ./autogen.sh || true
