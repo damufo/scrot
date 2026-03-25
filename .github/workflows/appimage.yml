@@ -71,7 +71,7 @@ jobs:
             --appdir AppDir \
             -e AppDir/usr/bin/scrot \
             --library /lib/x86_64-linux-gnu/libImlib2.so.1 \
-            --deploy-deps-only
+            --deploy-deps-only AppDir/usr/bin/scrot
 
           ./linuxdeploy-x86_64.AppImage \
             --appdir AppDir \
