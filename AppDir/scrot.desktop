@@ -4,3 +4,4 @@ Exec=scrot
 Type=Application
 Terminal=true
 Categories=Utility;
+Icon=scrot
