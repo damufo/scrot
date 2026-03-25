@@ -36,6 +36,9 @@ jobs:
       - name: Ver binario
         run: |
           ls -l src/
+      - name: Ver dependencias
+        run: |
+          ldd src/scrot
       - name: Preparar AppDir
         run: |
           mkdir -p AppDir/usr/bin
