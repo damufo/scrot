@@ -39,7 +39,7 @@ jobs:
           mkdir -p AppDir/usr/bin
           cp src/scrot AppDir/usr/bin/
           # Copiar plantilla do repo
-          cp AppDir/scrot.desktop AppDir/
+          #cp AppDir/scrot.desktop AppDir/
       - name: Descargar linuxdeploy
         run: |
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
