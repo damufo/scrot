@@ -50,6 +50,7 @@ jobs:
           mkdir -p AppDir/usr/lib/imlib2/loaders
           # Copiar loaders de Imlib2
           cp -r /usr/lib/x86_64-linux-gnu/imlib2/loaders/* AppDir/usr/lib/imlib2/loaders/
+
           # Crear AppRun
           cat > AppDir/AppRun <<'EOF'
 #!/bin/sh
