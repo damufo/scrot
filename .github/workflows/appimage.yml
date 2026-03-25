@@ -50,7 +50,16 @@ jobs:
           mkdir -p AppDir/usr/lib/imlib2/loaders
           # Copiar loaders de Imlib2
           cp -r /usr/lib/x86_64-linux-gnu/imlib2/loaders/* AppDir/usr/lib/imlib2/loaders/
-    
+          # Crear AppRun
+          cat > AppDir/AppRun <<'EOF'
+#!/bin/sh
+HERE="$(dirname "$(readlink -f "$0")")"
+export LD_LIBRARY_PATH="$HERE/usr/lib:$LD_LIBRARY_PATH"
+export IMLIB2_LOADER_PATH="$HERE/usr/lib/imlib2/loaders"
+exec "$HERE/usr/bin/scrot" "$@"
+EOF
+
+    chmod +x AppDir/AppRun
       - name: Descargar linuxdeploy
         run: |
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
