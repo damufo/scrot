@@ -24,7 +24,7 @@ jobs:
             pkg-config \
             libimlib2-dev \
             libx11-dev \
-            libxext-dev
+            libxext-dev \
             libxcomposite-dev \
             libxfixes-dev \
             libxrandr-dev
