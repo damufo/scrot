@@ -3,3 +3,4 @@ Name=Scrot
 Exec=scrot
 Type=Application
 Terminal=true
+Categories=Utility;
