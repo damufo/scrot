@@ -25,6 +25,9 @@ jobs:
             libimlib2-dev \
             libx11-dev \
             libxext-dev
+            libxcomposite-dev \
+            libxfixes-dev \
+            libxrandr-dev
       - name: Compilar scrot
         run: |
           ./autogen.sh || true
