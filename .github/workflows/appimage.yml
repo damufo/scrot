@@ -46,17 +46,35 @@ jobs:
           cp doc/scrot.png AppDir/scrot.png
           # Copiar plantilla do repo
           #cp AppDir/scrot.desktop AppDir/
-
+          # Crear ruta para loaders
+          mkdir -p AppDir/usr/lib/imlib2/loaders
+          # Copiar loaders de Imlib2
+          cp -r /usr/lib/x86_64-linux-gnu/imlib2/loaders/* AppDir/usr/lib/imlib2/loaders/
+    
       - name: Descargar linuxdeploy
         run: |
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
           chmod +x linuxdeploy-x86_64.AppImage
 
+#      - name: Construír AppImage
+#        run: |
+#          ./linuxdeploy-x86_64.AppImage \
+#            --appdir AppDir \
+#            -e AppDir/usr/bin/scrot \
+#            --output appimage
+
       - name: Construír AppImage
         run: |
+          export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+ 
           ./linuxdeploy-x86_64.AppImage \
             --appdir AppDir \
             -e AppDir/usr/bin/scrot \
+            --library /lib/x86_64-linux-gnu/libImlib2.so.1 \
+            --deploy-deps-only
+
+          ./linuxdeploy-x86_64.AppImage \
+            --appdir AppDir \
             --output appimage
 
       - name: Subir artefacto
